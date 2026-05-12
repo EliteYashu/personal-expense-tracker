@@ -831,9 +831,9 @@
   </main>
 
   <script>
-    const API_BASE = ['127.0.0.1:3000', 'localhost:3000'].includes(window.location.host)
-      ? ''
-      : 'http://localhost:3000';
+    const isNodeServer = ['127.0.0.1:3000', 'localhost:3000'].includes(window.location.host);
+    const isLocalPreview = window.location.protocol === 'file:' || ['127.0.0.1:5500', 'localhost:5500'].includes(window.location.host);
+    const API_BASE = isNodeServer ? '' : isLocalPreview ? 'http://localhost:3000' : '';
     const API_URL = `${API_BASE}/api/expenses`;
     const categories = ['Food', 'Transport', 'Shopping', 'Bills', 'Health', 'Education', 'Entertainment', 'Other'];
     const currencyFormats = {
